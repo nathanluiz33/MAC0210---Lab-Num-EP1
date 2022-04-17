@@ -12,7 +12,7 @@ const double PI = acos(-1);
 
 typedef complex<double> cd;
 
-cd newton_method(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
+cd newton(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
     cd raiz = x0;
 
     while(abs(F(raiz)) > EPS && lim_iteracoes > 0){
@@ -20,32 +20,38 @@ cd newton_method(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
         lim_iteracoes--;
     }
 
-    // assert(lim_iteracoes > 0);
+    if(lim_iteracoes == 0) return cd(NAN, NAN);
 
     return raiz;
 }
 
-cd f(cd x){
+cd evalf(cd x){
     return sin(x);
 }
 
-cd df(cd x){
+cd evalDf(cd x){
     return cos(x);
 }
 
-cd f1(cd x){
+cd evalf1(cd x){
     return pow(x, 3) - cd(1., 0.);
 }
 
-cd df1(cd x){
+cd evalDf1(cd x){
     return cd(3., 0.) * pow(x, 2);
 }
 
-int main(){
-    // cout << newton_method(cd(1, 1), f, df, 1000);
-    for(double x = -2; x <= 2; x += 1e-2)
-        for(double y = -2; y <= 2; y += 1e-2){
+void newton_basis(double l, double u, int p) {
+    double step = (u - l) / p;
+    for(double x = l; x <= u; x += step)
+        for(double y = l; y <= u; y += step){
             cout << "(" << x << ", " << y << ") ";
-            cout << newton_method(cd(x, y), f, df, 1000) << "\n";
+            cout << newton(cd(x, y), evalf, evalDf, 1000) << "\n";
         }
+}
+
+int main() {
+    freopen("output.txt", "w", stdout);
+    newton_basis(-2, 2, 400);
+    return 0;
 }
