@@ -5,9 +5,12 @@
 #include <cmath>
 #include <assert.h>
 
+// #include "gnuplot-iostream.h"
+
 using namespace std;
 
 const double EPS = 1e-8;
+const double PI = acos(-1);
 
 typedef complex<double> cd;
 
@@ -15,7 +18,6 @@ cd newton_method(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
     cd raiz = x0;
 
     while(abs(F(raiz)) > EPS && lim_iteracoes > 0){
-        cout << raiz << "\n";
         raiz = raiz - F(raiz) / dF(raiz);
         lim_iteracoes--;
     }
@@ -34,10 +36,9 @@ cd df(cd x){
 }
 
 int main(){
-    // using namespace complex_literals;
-    cd z1 = 10. + 200i;
-    cout << newton_method(z1, f, df, 1000);
-    // cout << z1 << "\n";
-    // cout << abs(z1) << "\n";
-    // cout << imag(df(z1)) << "\n";
+    for(double x = -20; x <= 20; x += 1e-1)
+        for(double y = -20; y <= 20; y += 1e-1){
+            cout << "(" << x << ", " << y << ") ";
+            cout << round(real(newton_method(cd(x, y), f, df, 1000)) / PI) << "\n";
+        }
 }
