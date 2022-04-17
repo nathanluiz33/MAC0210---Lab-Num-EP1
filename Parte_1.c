@@ -80,4 +80,5 @@ int main(){
         else fim = meio;
     }
     printf("Maior valor que converge para r2 em g1(x): %.8f\n\n", ini);
+    return 0;
 }
