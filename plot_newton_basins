@@ -1,0 +1,4 @@
+# para rodar esse script faz gnuplot plot_newton_basins numa terminal nesta pasta
+# o arquivo output.txt deve existir nesta pasta e deve ter sido gerado com Parte_2.cpp
+
+plot 'output.txt' using 1:2:(arg($3+$4*{0,1})) '(%lf,%lf) (%lf,%lf)' palette
