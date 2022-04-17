@@ -20,7 +20,7 @@ cd newton_method(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
         lim_iteracoes--;
     }
 
-    assert(lim_iteracoes > 0);
+    // assert(lim_iteracoes > 0);
 
     return raiz;
 }
@@ -33,9 +33,18 @@ cd df(cd x){
     return cos(x);
 }
 
+cd f1(cd x){
+    return pow(x, 3) - cd(1., 0.);
+}
+
+cd df1(cd x){
+    return cd(3., 0.) * pow(x, 2);
+}
+
 int main(){
-    for(double x = -20; x <= 20; x += 1e-1)
-        for(double y = -20; y <= 20; y += 1e-1){
+    // cout << newton_method(cd(1, 1), f, df, 1000);
+    for(double x = -2; x <= 2; x += 1e-2)
+        for(double y = -2; y <= 2; y += 1e-2){
             cout << "(" << x << ", " << y << ") ";
             cout << newton_method(cd(x, y), f, df, 1000) << "\n";
         }
