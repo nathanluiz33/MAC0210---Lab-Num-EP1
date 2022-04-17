@@ -5,8 +5,6 @@
 #include <cmath>
 #include <assert.h>
 
-// #include "gnuplot-iostream.h"
-
 using namespace std;
 
 const double EPS = 1e-8;
@@ -39,6 +37,6 @@ int main(){
     for(double x = -20; x <= 20; x += 1e-1)
         for(double y = -20; y <= 20; y += 1e-1){
             cout << "(" << x << ", " << y << ") ";
-            cout << round(real(newton_method(cd(x, y), f, df, 1000)) / PI) << "\n";
+            cout << newton_method(cd(x, y), f, df, 1000) << "\n";
         }
 }
