@@ -14,9 +14,9 @@ typedef complex<double> cd;
 cd newton_method(cd x0, cd (*F)(cd), cd (*dF)(cd), int lim_iteracoes){
     cd raiz = x0;
 
-    while(abs(raiz) > EPS && lim_iteracoes > 0){
+    while(abs(F(raiz)) > EPS && lim_iteracoes > 0){
         cout << raiz << "\n";
-        raiz = raiz + F(raiz) / dF(raiz);
+        raiz = raiz - F(raiz) / dF(raiz);
         lim_iteracoes--;
     }
 
@@ -35,7 +35,7 @@ cd df(cd x){
 
 int main(){
     // using namespace complex_literals;
-    cd z1 = 1. + 2i;
+    cd z1 = 10. + 200i;
     cout << newton_method(z1, f, df, 1000);
     // cout << z1 << "\n";
     // cout << abs(z1) << "\n";
