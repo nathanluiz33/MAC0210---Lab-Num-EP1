@@ -41,7 +41,7 @@ cd evalDf1(cd x){
     return cd(3., 0.) * pow(x, 2);
 }
 
-void newton_basis(double l, double u, int p) {
+void newton_basins(double l, double u, int p) {
     double step = (u - l) / p;
     for(double x = l; x <= u; x += step)
         for(double y = l; y <= u; y += step){
@@ -52,6 +52,6 @@ void newton_basis(double l, double u, int p) {
 
 int main() {
     freopen("output.txt", "w", stdout);
-    newton_basis(-2, 2, 400);
+    newton_basins(-2, 2, 400);
     return 0;
 }
