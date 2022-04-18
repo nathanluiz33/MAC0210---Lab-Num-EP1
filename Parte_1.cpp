@@ -3,15 +3,22 @@
 
 const double EPS = 1e-8;
 
+/* ABS: retorna o valor absoluto de um real x
+*/
 double ABS(double x){
     if(x > -EPS) return x;
     return -x;
 }
 
-// g(x) = x <-> f(x) = 0
-double metodo_ponto_fixo(double x0, double (*f)(double), double (*G)(double), int limite_iteracoes){
+/* metodo_ponto_fixo: função que retorna um double sendo a raiz para onde
+*  um ponto converge pelo Método do Ponto Fixo. Caso não haja convergência, retorna NAN.
+*  x0 -> ponto inicial de iteracao, f -> função em que vamos utilizar o método
+*  df -> derivada de f, lim_iteracoes -> número máximo permitido de iteracoes do método
+*  para utilizar esse método, é necessária a condição de g(x) = x <-> f(x) = 0
+*/
+double metodo_ponto_fixo(double x0, double (*F)(double), double (*G)(double), int limite_iteracoes){
     double raiz = x0;
-    while((ABS(f(raiz)) > EPS || ABS(raiz - G(raiz)) > EPS) && limite_iteracoes > 0){
+    while((ABS(F(raiz)) > EPS || ABS(raiz - G(raiz)) > EPS) && limite_iteracoes > 0){
         limite_iteracoes--;
         raiz = G(raiz);
     }
@@ -19,16 +26,17 @@ double metodo_ponto_fixo(double x0, double (*f)(double), double (*G)(double), in
     return raiz;
 }
 
+// função eˆx - 2 xˆ2
 double f(double x){
     return exp(x) - 2 * x * x;
 }
 
-// raiz = 1
+// essa função converge para r_1 se o ponto inicial for 1
 double g(double x){
     return f(x) + x;
 }
 
-// raiz = 2, 1
+// essa função converge para r_0 se o ponto inicial for 1 e para r_2 se o ponto inicial for 2
 double g1(double x){
     return -f(x) / 2 + x;
 }
@@ -39,6 +47,8 @@ int main(){
     printf("A segunda raiz é: %.8f\n", r1);
     printf("A terceira raiz é: %.8f\n\n", r2);
 
+    // as buscas binárias abaixo são para achar o menor e maior valor que converge para cada raiz
+    // nas funções g e g1
     double ini = -1, fim = 0;
     while(fim - ini > EPS){
         double meio = (ini + fim) / 2;
