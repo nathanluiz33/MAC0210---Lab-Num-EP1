@@ -67,6 +67,6 @@ void newton_basins(double l, double u, int p) {
 
 int main() {
     freopen("output.txt", "w", stdout);
-    newton_basins(-2, 2, 400);
+    newton_basins(-2, 2, 1000);
     return 0;
 }
