@@ -3,7 +3,7 @@
 
 Integrantes |nUSP
 -- | --
-Enrique Junchaya | ? 
+Enrique Junchaya | 11726549
 Nathan Luiz Bezerra Martins | 11805061
 
 Esse repositório foi criado com o objetivo de registrar e armazenar o primeiro exercício programa de MAC0210, 2022/1. Nesse EP, nós utilizamos os métodos do Ponto Fixo e de Newton para descobrir as raízes de uma função.
